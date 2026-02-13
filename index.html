@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Noelia 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 45px 35px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      max-width: 380px;
+      width: 90%;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.15em;
+      margin-bottom: 35px;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      padding: 14px 30px;
+      font-size: 1.05em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 8px 20px rgba(255,77,109,0.6);
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: white;
+      color: #ff4d6d;
+      position: relative;
+    }
+
+    /* corazones flotando */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>💌 Noelia 💌</h1>
+    <p>
+      Desde que llegaste, mis días son más bonitos.<br>
+      Así que dime…<br><br>
+      <strong>¿Quieres ser mi San Valentín? 💖</strong>
+    </p>
+    <div class="buttons">
+      <button class="yes" onclick="yes()">Sí 💕</button>
+      <button class="no" onmouseover="moveNo()">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    function yes() {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+          color:white;
+          font-family:'Segoe UI',sans-serif;
+          text-align:center;
+          padding:20px;
+        ">
+          <h1>
+            💖 Gracias por decir que sí 💖<br><br>
+            Prometo hacerte sonreír cada día, Noelia ✨
+          </h1>
+        </div>
+      `;
+    }
+
+    function moveNo() {
+      const btn = document.querySelector('.no');
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // generar corazones
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+  </script>
+
+</body>
+</html>
