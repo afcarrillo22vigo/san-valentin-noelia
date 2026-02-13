@@ -57,7 +57,6 @@
       font-size: 1.1em;
       border-radius: 35px;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .yes {
@@ -66,17 +65,12 @@
       box-shadow: 0 8px 20px rgba(255,77,109,0.6);
     }
 
-    .yes:active {
-      transform: scale(1.08);
-    }
-
     .no {
       background: white;
       color: #ff4d6d;
       position: relative;
     }
 
-    /* corazones flotando */
     .heart {
       position: absolute;
       animation: float 6s linear infinite;
@@ -113,7 +107,18 @@
   </div>
 
   <script>
+    // vibración automática al abrir (si el móvil lo permite)
+    window.onload = () => {
+      if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+      }
+    };
+
     function yes() {
+      if (navigator.vibrate) {
+        navigator.vibrate([300, 150, 300, 150, 400]);
+      }
+
       document.body.innerHTML = `
         <div style="
           min-height:100vh;
@@ -126,22 +131,34 @@
           text-align:center;
           padding:20px;
         ">
-          <h1 style="font-size:clamp(1.8em,6vw,2.4em);">
-            💖 Gracias por decir que sí 💖<br><br>
-            Prometo hacerte sonreír cada día, Noelia ✨
-          </h1>
+          <div>
+            <h1 style="font-size:clamp(1.8em,6vw,2.4em);">
+              💖 Gracias por decir que sí 💖
+            </h1>
+            <p style="font-size:1.2em; margin-bottom:25px;">
+              Prometo hacerte sonreír cada día, Noelia ✨
+            </p>
+            <img 
+              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2Z2aWk0d3RhbXQ0Y2Q4czJvMW9oaTJ6NjZpYTN2cTNzYTBtdzJ3YSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif"
+              alt="Love gif"
+              style="width:100%; max-width:300px; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.3);"
+            >
+          </div>
         </div>
       `;
     }
 
     function moveNo() {
+      if (navigator.vibrate) {
+        navigator.vibrate(100);
+      }
       const btn = document.querySelector('.no');
       const x = Math.random() * 120 - 60;
       const y = Math.random() * 120 - 60;
       btn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    // corazones
+    // corazones flotando
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
